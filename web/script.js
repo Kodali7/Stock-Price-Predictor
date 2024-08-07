@@ -3,7 +3,7 @@ function submitForm() {
   let time = document.getElementById("time").value;
   let price = document.getElementById("price").value;
 
-  fetch("https://localhost:5000/predictions", {
+  fetch("http://127.0.0.1:5000/predictions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

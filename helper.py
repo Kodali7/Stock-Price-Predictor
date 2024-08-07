@@ -1,4 +1,4 @@
-from static.libraries import *
+from libraries import *
 
 # Visualizing
 def week_price_plotter(name,

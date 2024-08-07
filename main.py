@@ -1,4 +1,4 @@
-from static.helper import *
+from helper import *
 
 
 def train_test_model(STOCK_NAME, day):

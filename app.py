@@ -7,9 +7,11 @@ model = LSTM_Model(input_shape=1,
                    hidden_layers=50,
                    layers=1,
                    output_shape=1).to(device)
-model.load_state_dict(torch.load('model.pth', map_location=device))
+# FIX THIS LINE
+# model.load_state_dict(torch.load('model.pth', map_location=device, weight_only=True))
+# checkpoint = torch.load('model.pt', map_location='cpu')
+# model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
-
 
 app = Flask(__name__)
 @app.route('/prediction', methods=['POST'])
