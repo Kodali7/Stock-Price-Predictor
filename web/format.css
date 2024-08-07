@@ -1,0 +1,89 @@
+* {
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+
+.header {
+    position: fixed;
+    background: darkgray;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#headerTitle {
+    color: black;
+    margin: 0;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    display: block;
+}
+
+.navbar a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.main {
+    padding-top: 100px;
+    text-align: center;
+}
+
+.main button {
+  text-align: center;
+  width: 100px;
+  height: 50px;
+}
+
+.main h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-around;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+.option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.option a {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.option input, .option select {
+    padding: 10px;
+    font-size: 18px;
+    width: 150px;
+}

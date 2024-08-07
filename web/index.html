@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Predictor</title>
+    <link rel="stylesheet" href="format.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1 id="headerTitle">Stock Price Predictor</h1>
+        <nav class="navbar">
+            <img src="" class="logo">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main">
+        <h2>Select Your Setup</h2>
+        <div class="options">
+            <div class="option">
+                <a>Stock</a>
+                <input type="text" placeholder="Ticker Name" id="ticker">
+            </div>
+            <div class="option">
+                <a>Time</a>
+                <select name="time" id="time">
+                    <option value="">Select Time</option>
+                    <option value="day">Day</option>
+                    <option value="week">Week</option>
+                </select>
+            </div>
+            <div class="option">
+                <a>Price</a>
+                <select name="price" id="price">
+                    <option value="">Select Price</option>
+                    <option value="open">Open</option>
+                    <option value="close">Close</option>
+                </select>
+            </div>
+        </div>
+        <button onclick="submitForm()">Submit</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
