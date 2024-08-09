@@ -3,6 +3,8 @@ from flask_cors import CORS, cross_origin
 from main import *
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True, resources={r"/predictions": {"origins": "http://127.0.0.1:5500"}})
+app.config['CORS_ALLOW_HEADERS'] = 'Content-Type'
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = LSTM_Model(input_shape=1,
@@ -10,13 +12,15 @@ model = LSTM_Model(input_shape=1,
                    layers=1,
                    output_shape=1).to(device)
 # FIX THIS LINE
-# model.load_state_dict(torch.load('model.pth', map_location=device, weight_only=True))
+dir_path = '/Users/saikodali/Documents/GitHub/Stock-Price-Predictor'
+file_path = os.path.join(dir_path, 'model.pth')
+model.load_state_dict(torch.load(file_path, map_location=device, weight_only=True))
 # checkpoint = torch.load('model.pt', map_location='cpu')
 # model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
 
 
-@app.route('/prediction', methods=['POST'])
+@app.route('/predictions', methods=['POST','OPTIONS'])
 @cross_origin()
 def stockPredict():
     try:

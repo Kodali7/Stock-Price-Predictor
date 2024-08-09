@@ -78,7 +78,15 @@ def train_test_model(STOCK_NAME, day):
         print(f"Loss: {loss:.3f} | Test Loss: {test_loss:.3f}")
 
   # Finalizing for visualizing
-  torch.save(model.state_dict(), 'model.pth')
+  dir_path = '/Users/saikodali/Documents/GitHub/Stock-Price-Predictor'
+  file_path = os.path.join(dir_path, 'model.pth')
+  if not os.path.exists(dir_path):
+     os.makedirs(dir_path)
+  try:
+     torch.save(model.state_dict(), file_path)
+     print('File Created')
+  except Exception as e:
+     print(f'Error here {e}')
 
   model.eval()
   with torch.inference_mode():
