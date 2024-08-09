@@ -1,4 +1,4 @@
-#!/Users/saikodali/Desktop/Coding/Stock_Predictor/myenv/bin/python3
+#!/Users/saikodali/Documents/GitHub/Stock-Price-Predictor/myenv/bin/python
 
 import datetime
 import os

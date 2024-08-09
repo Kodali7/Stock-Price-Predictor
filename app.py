@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, send_file
+from flask_cors import CORS, cross_origin
 from main import *
 
+app = Flask(__name__)
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = LSTM_Model(input_shape=1,
@@ -13,8 +15,9 @@ model = LSTM_Model(input_shape=1,
 # model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
 
-app = Flask(__name__)
+
 @app.route('/prediction', methods=['POST'])
+@cross_origin()
 def stockPredict():
     try:
         request_data = request.json
