@@ -16,7 +16,6 @@ def train_test_model(STOCK_NAME, day):
   tz = midday_data.index.tzinfo
   currenttime = datetime.now(tz)
 
-  day = input("Open or Close? ")
   # Formatting data
   scaler = MinMaxScaler(feature_range=(-1,1))
   scaled_data = scaler.fit_transform(week_data[day].values.reshape(-1,1))
@@ -44,7 +43,7 @@ def train_test_model(STOCK_NAME, day):
 
   model = LSTM_Model(input_shape=1,
                     hidden_layers=50,
-                    layers=1,
+                    layers=2,
                     output_shape=1).to(device)
 
   epochs=1000
@@ -95,5 +94,3 @@ def train_test_model(STOCK_NAME, day):
     preds = model(final_sample)
   preds=scaler.inverse_transform(preds.squeeze())
   return preds
-
-train_test_model('TSLA', 'Close')

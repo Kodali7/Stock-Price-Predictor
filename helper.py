@@ -1,5 +1,5 @@
 from libraries import *
-
+img = BytesIO()
 # Visualizing
 def week_price_plotter(name,
                        price_type,
