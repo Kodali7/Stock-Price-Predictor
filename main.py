@@ -80,6 +80,7 @@ def train_test_model(STOCK_NAME, day):
   # Finalizing for visualizing
   dir_path = '/Users/saikodali/Documents/GitHub/Stock-Price-Predictor'
   file_path = os.path.join(dir_path, 'model.pth')
+  print(file_path)
   if not os.path.exists(dir_path):
      os.makedirs(dir_path)
   try:
@@ -94,3 +95,5 @@ def train_test_model(STOCK_NAME, day):
     preds = model(final_sample)
   preds=scaler.inverse_transform(preds.squeeze())
   return preds
+
+train_test_model('TSLA', 'Close')

@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, make_response
 from flask_cors import CORS, cross_origin
 from main import *
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, resources={r"/predictions": {"origins": "http://127.0.0.1:5500"}})
-app.config['CORS_ALLOW_HEADERS'] = 'Content-Type'
+# CORS(app, supports_credentials=True, resources={r"/predictions": {"origins": "http://127.0.0.1:5500"}})
+# app.config['CORS_ALLOW_HEADERS'] = 'Content-Type'
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = LSTM_Model(input_shape=1,
@@ -21,9 +21,18 @@ model.load_state_dict(torch.load(file_path, map_location=device, weights_only=Tr
 # model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
 
-
-@app.route('/predictions', methods=['POST','OPTIONS'])
+@app.route('/predictions', methods=['OPTIONS'])
 @cross_origin()
+def intercept():
+    response = make_response()
+    open('worked', 'w')
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Headers", "*")
+    response.headers.add("Access-Control-Allow-Methods", "*")
+    return response
+
+@app.route('/predictions', methods=['POST'])
+# @cross_origin()
 def stockPredict():
     try:
         request_data = request.json
