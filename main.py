@@ -37,7 +37,8 @@ def train_test_model(STOCK_NAME, day):
   X_train, X_test, y_train, y_test = train_test_split(sequence, target, test_size=0.2,shuffle=False)
 
   # Training time
-  device = 'cuda' if torch.cuda.is_available() else 'cpu'
+  # device = 'cuda' if torch.cuda.is_available() else 'cpu'
+  device = 'cpu'
   X_train, y_train = torch.tensor(X_train,dtype=torch.float32).to(device), torch.tensor(y_train, dtype=torch.float32).unsqueeze(1).expand(-1,3,1).to(device)
   X_test, y_test = torch.tensor(X_test, dtype=torch.float32).to(device), torch.tensor(y_test, dtype=torch.float32).unsqueeze(1).expand(-1,3,1).to(device)
 

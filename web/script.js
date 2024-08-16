@@ -12,7 +12,7 @@ function submitForm() {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("Prediction:", data.prediction);
+      console.log("Prediction:", response);
     })
     .catch((error) => {
       console.log("There was an error with the data processing");
