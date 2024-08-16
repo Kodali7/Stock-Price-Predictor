@@ -29,9 +29,9 @@ def stockPredict():
         return _build_cors_preflight_response()
     elif request.method == "POST":
         try:
-            print(request.json + "SOMETHING NEW")
+            print(request.json, "SOMETHING NEW")
             request_data = request.json
-            ticker = request_data.get('ticker')
+            ticker = yf.Ticker(request_data.get('ticker'))
             time = request_data.get('time')
             price_type = request_data.get('price')
 
@@ -57,13 +57,14 @@ def stockPredict():
                                 week_data,
                                 preds)
             img.seek(0)
-            response =  send_file(img,mimetype='image/png',as_attachment=False, attachment_filename='plot.png')
+            response =  send_file(img,mimetype='image/png', as_attachment=False)
             _corsify_actual_response(response)
             print(response)
             return response
 
         except Exception as e:
-            return _corsify_actual_response(jsonify({'Error:', str(e)})), 400
+            app.logger.error(f"An error occurred: {str(e)}")
+            return jsonify({'error': str(e)}), 500
     else:
         return _corsify_actual_response(jsonify({'Error': 'Method not allowed'})), 405
         
@@ -80,3 +81,4 @@ def _corsify_actual_response(response):
 
 if __name__ == "__main__":
     app.run(debug=True)
+    stockPredict()
