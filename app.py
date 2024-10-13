@@ -4,7 +4,8 @@ from main import *
 
 app = Flask(__name__)
 app.debug = True
-CORS(app, supports_credentials=True, resources={r"/predictions": {"origins": "http://127.0.0.1:5500"}})
+# CORS(app, supports_credentials=True, resources={r"/predictions": {"origins": "http://127.0.0.1:5500"}})
+CORS(app, resources={r"/predictions": {"origins": "http://127.0.0.1:5500"}})
 app.config['CORS_ALLOW_HEADERS'] = 'Content-Type'
 
 
@@ -23,11 +24,11 @@ file_path = os.path.join(dir_path, 'model.pth')
 
 
 @app.route('/predictions', methods=['POST','OPTIONS'])
-@cross_origin(origin='http://127.0.0.1:5500', allow_headers=['Content-Type'])
+@cross_origin(origin='*', allow_headers=['Content-Type'])
 def stockPredict():
-    if request.method == "OPTIONS":
-        return _build_cors_preflight_response()
-    elif request.method == "POST":
+    # if request.method == "OPTIONS":
+    #     return _build_cors_preflight_response()
+    if request.method == "POST":
         try:
             print(request.json, "SOMETHING NEW")
             request_data = request.json
@@ -58,6 +59,7 @@ def stockPredict():
                                 preds)
             img.seek(0)
             response =  send_file(img,mimetype='image/png', as_attachment=False)
+            response.headers["Access-Control-Allow-Origin"] = "*"
             _corsify_actual_response(response)
             print(response)
             return response
