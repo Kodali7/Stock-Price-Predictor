@@ -60,7 +60,7 @@ def stockPredict():
             img.seek(0)
             response =  send_file(img,mimetype='image/png', as_attachment=False)
             response.headers["Access-Control-Allow-Origin"] = "*"
-            _corsify_actual_response(response)
+            # _corsify_actual_response(response)
             print(response)
             return response
 
@@ -72,13 +72,13 @@ def stockPredict():
         
 def _build_cors_preflight_response():
     response = Response()
-    response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5500")
+    response.headers.add("Access-Control-Allow-Origin", "*")
     response.headers.add('Access-Control-Allow-Headers', "*")
     response.headers.add('Access-Control-Allow-Methods', "*")
     return response
 
 def _corsify_actual_response(response):
-    response.headers.add("Access-Control-Allow-Origin", "http://127.0.0.1:5500")
+    response.headers.add("Access-Control-Allow-Origin", "*")
     return response
 
 if __name__ == "__main__":
